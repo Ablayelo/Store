@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <title>{% block title %}{% endblock title %}</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href=" {% static 'store/dist/css/bootstrap.min.css' %} ">
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href=" {% static 'store/css/base.css' %} "> 
+  {% block css %} {% endblock css %}
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Fifth navbar example">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'store:index' %}"><a href="/" class="logo  "><img class="rounded" height="32" width="auto" src="{% static 'store/img/gs21ultra.png' %}" alt=""></a></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05"
+        aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample05">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'store:index' %}">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Produits</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href=" {% url 'store:category' %} ">Catégories</a>
+          </li>
+        </ul>
+        <div id="login" class="form-inline my-2 my-lg-0">
+          <a href="{% url 'store:login' %}" class="btnblock btn btn-info  btn-success  btn-block">Se
+            connecter</a>
+          <a href=" {% url 'store:register' %} " class="btnblock btn btn-info  btn-success  btn-block">S'inscrire</a>
+        </div>
+        <div class="form-inline my-2 my-lg-0">
+          <a href="{% url 'store:cart' %}">
+            <img id="cart-icon" src="{% static 'store/img/cart-icon.png' %}" height="auto" width="170">
+          </a>
+          <a href="{% url 'store:cart' %}">
+            <p id="cart-total">3</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  {% block content %}
+
+  {% endblock content %}
+ 
+  <script src=" {% static 'store/dist/js/bootstrap.min.js' %} "></script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href=" {% static 'store/css/product_detail.css' %} "> {% endblock css %}
+{% block title %}Detail{% endblock title %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <img class="img-fluid rounded" src=" {{product.imageURL}} " alt=" {{product.name}} ">
+        </div>
+
+        <div class="col-md-6 text-sm-center text-md-start ">
+            <p class="card-title">
+            <h4><span class=" btn-dark rounded d-block text-center ">{{product.name}}</span></h4>
+            </p>
+            <p class="card-title"><b>Prix: </b><span><b>{{product.price}} Fcfa</b></span> au lieu
+                de <span style="padding-left:10px; ; color: red;"><b><strike style="font-size: xx-large;">{{product.oldPrice}} Fcfa</strike></b></span></p>
+            </a><button class="btn btn-outline-success">Ajouter au panier</button>
+            <hr>
+            <article style="color: dark;" class=""> <span class=" btn-dark rounded d-block text-center ">
+                    <h4>Description</h4>
+                </span> {{product.description}} </article>
+        </div>
+    </div>
+</div>
+{% endblock content %}

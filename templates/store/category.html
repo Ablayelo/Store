@@ -1,0 +1,16 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}{% endblock css %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        {% for c in category %}
+        <div class="col-md-4 rounded">
+            <p><img {% if c.imageURL %} src=" {{c.imageURL}}" {% else %}src={% static 'store/img/dkandroid.png' %}{%endif%}  width='auto' height="250px" alt=" {{c.name}} "></a></p>
+            <p>{{c.name}}</p>
+            <a href=" {% url 'store:category' %} ">Voir la categorie</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,40 @@
+.btn-outline-dark{
+    float: left;
+    margin-top: 10px;
+}
+.tb{
+    background-color:grey; 
+    border-radius: 7px;
+    margin-top: 10px;
+}
+.table{
+    box-shadow:20px; text-align: center;
+}
+.td{
+    text-align: center;
+}
+.arrow{
+    display: inline-flex;
+}
+.img-arrow{
+    display: block;
+}
+.item{
+    display: block;
+    margin-right:8px 
+}
+.total{
+    float: right;
+    display:inline-flex;
+    margin-top: 10px;
+}
+.total h4{
+    margin-top: -5px;
+}
+.total h5{
+    margin-left: 6px;
+}
+.process-btn{
+    margin-bottom: 10px;
+    float: right;
+}

@@ -1,0 +1,71 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'store/css/cart.css' %}">{% endblock css %}
+{% block title %}Mon panier{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row" background-color="grey">
+        <div class="col-md-12">
+            <a href=" {% url 'store:index' %} "><button class="btn btn-outline-dark"><span>&#10096;</span>
+                    Retour</button></a>
+        </div>
+        <div class="col-md-12 tb">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">prix</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Sous-total</th>
+                    </tr>
+                </thead>
+                {% if msg %}
+                <div class="txt-warining">
+                    <h3>{{msg|safe}}</h3>
+                </div>
+                {% else %}
+                {% for item in items %}
+                <tbody>
+                    <tr>
+                        <th scope="row"> <img class="rounded" height="45" width="auto" src="{{item.product.imageURL}}"
+                                alt="">
+                        </th>
+                        <td>{{item.product.name}}</td>
+                        <td>{{item.product.price}}</td>
+                        <td>
+                            <div class="arrow">
+                                <div class="item"><b>{{item.qty}}</b></div>
+                                <div>
+                                    <img class="img-arrow" id="arrow-up" height="13px" width="auto"
+                                        src=" {% static 'store/img/arrow-up.png' %} " alt="">
+                                    <img class="img-arrow" id="arrow-down" height="13px" width="auto"
+                                        src=" {% static 'store/img/arrow-down.png' %} " alt="">
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>{{item.get_total}} Fcfa</td>
+                    </tr>
+
+                </tbody>
+                {% endfor %}
+                {%endif%}
+                <tfoot>
+                    <div class="total">
+                        <h4>Total:</h4>
+
+                        <h5></h5>{% if msg %} Total = 0 Fcfa {% else %} {{order.get_cart_total}}Fcfa {%endif%}</h5>
+                    </div>
+                </tfoot>
+            </table>
+            <a href="{% url 'store:checkout' %}">
+                <button class="process-btn btn btn-success btn-block">Procéder au
+                    paiement</button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

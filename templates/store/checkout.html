@@ -1,0 +1,103 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}Procéder au paiement{% endblock title %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <!-- <div class="col-md-12">
+            <a href=" {% url 'store:index' %} "></a> <button style="float: left; margin-top: 10px; margin-bottom: 10px;"
+                class="btn btn-outline-dark"><span>&#10096;</span> Retour au panier</button>
+        </div> -->
+        
+        <div class="col-md-6" style="background-color: grey; margin-top: 10px; border-radius: 10px; ">
+            <div style="display: inline-block;"> <a style="text-decoration: none;"
+                    href=" {% url 'store:cart' %} "><button style="float: left; margin-top: 10px; margin-bottom: 10px;"
+                        class="btn btn-outline-dark"><span>&#10096;</span> Retour au panier</button></a>
+            </div>
+            <p>Résumé du panier</p>
+            <table class="table" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Sous total</th>
+                    </tr>
+                </thead>
+                {% for item in items %}
+                <tbody>
+                    <tr>
+                        <td>
+                            <img class="rounded" src="{{item.product.imageURL}} " height="50px"
+                                width="auto" alt="">
+                        </td>
+                        <td>{{item.product.price}}Fcfa</td>
+                        <td style="text-align: center;">
+
+                            <div style="display: inline-flex;">
+                                <div style="display: block; margin-right:8px "><b>{{item.qty}}</b></div>
+                                <div>
+                                    <img style="display: block;" src=" {% static 'store/img/arrow-up.png' %} "
+                                        height="13" width="auto" alt="">
+                                    <img style="display: block;" src=" {% static 'store/img/arrow-down.png' %} "
+                                        height="13" width="auto" alt="">
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>{{item.get_total}}Fcfa</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+                <div style="float: right; display:inline-flex; margin-top: 10px;">
+                    <h4 style="margin-top: -5px;">Total:</h4>
+                    <h5 style="margin-left: 10px;">{{order.get_cart_total}}Fcfa</h5>
+                </div>
+            </table>
+
+            </p>
+        </div>
+        <div class="col-md-6">
+            <form>
+                <div class="form-field">
+                    <div class="form-field">
+                        <input style="margin-bottom: 5px;margin-top: 10px;" class="form-control" type="text" name="name"
+                            placeholder="Nom">
+                    </div>
+                    <div class="form-field"></div>
+                    <input class="form-control" type="email" name="email" placeholder="Email">
+                </div>
+                <hr>
+                <div id="shipping-info">
+                    <p>Information de livraison</p>
+                    <div class="form-field">
+                        <input style="margin-bottom: 5px;" class="form-control" type="text" name="address"
+                            placeholder="Adresse">
+                    </div>
+                    <div class="form-field">
+                        <input style="margin-bottom: 5px;" class="form-control" type="text" name="city"
+                            placeholder="Ville">
+                    </div>
+                    <div class="form-field">
+                        <input style="margin-bottom: 5px;" class="form-control" type="text" name="state"
+                            placeholder="Etat">
+                    </div>
+                    <div class="form-field">
+                        <input style="margin-bottom: 5px;" class="form-control" type="text" name="zipcode"
+                            placeholder="Code Postale">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="country" placeholder="Pays">
+                    </div>
+
+                </div>
+                <hr>
+                <input id="form-button" class="btn btn-success btn-block" type="submit" value="continuer">
+            </form>
+
+        </div>
+
+    </div>
+
+    {% endblock content %}

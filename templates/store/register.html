@@ -1,0 +1,103 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'store/css/register.css' %}"> {% endblock css %}
+{% block title %}Créer un compte{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4  rounded "
+        style="margin-left: 420px; margin-top:2%; ">
+        <div class="card">
+            <form role="form" method="post" action="">
+                {% csrf_token %}
+                <div class="card-header">
+                    <h5 class="title">Inscription</h5>
+
+                    <h6 class="card-category">
+                        {% if msg %}
+                        <span class="text-success">{{ msg | safe }}</span>
+                        {% else %}
+                        Ajouter vos informations
+                        {% endif %}
+                    </h6>
+                </div>
+
+                {% if success %}
+
+                <p>
+                    Veuillez vous <a href="{% url 'store:login' %}">connecter</a> en utilisant ce nouveau compte.
+                </p>
+
+                {% else %}
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-6 px-md-1">
+                            <div class="form-group">
+                                <label>Username</label>
+                                {{ form.username }}
+                            </div>
+                            <div><span class="text-danger">{{ form.username.errors }}</span></div>
+                        </div>
+
+                        <div class="col-md-6 px-md-1">
+                            <div class="form-group">
+                                <label>Email</label>
+                                {{ form.email }}
+                            </div>
+                            <div><span class="text-danger">{{ form.email.errors }}</span></div>
+                        </div>
+                        
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 px-md-1">
+                            <div class="form-group">
+                                <label>Prenom</label>
+                                {{ form.first_name }}
+                            </div>
+                            <div><span class=" text-danger">{{ form.first_name.errors }}</span></div>
+                        </div>
+
+                        <div class="col-md-6 px-md-1">
+                            <div class="form-group">
+                                <label>Nom</label>
+                                {{ form.last_name }}
+                            </div>
+                            <div> <span class="text-danger">{{ form.last_name.errors }}</span></div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 px-md-1">
+                            <div class="form-group">
+                                <label>Mot de passe</label>
+                                {{ form.password1 }}
+                            </div>
+                            <div><span class="text-danger">{{ form.password1.errors }}</span></div>
+
+                        </div>
+                        
+                        <div class="col-md-6 px-md-1">
+                            <div class="form-group">
+                                <label>Vérification de mot de passe</label>
+                                {{ form.password2 }}
+                            </div>
+                            <div><span class="text-danger">{{ form.password2.errors }}</span></div>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" name="register" class="btn  btn-outline-info">M'inscrire</button>
+                    &nbsp; &nbsp;
+                    Déjà inscrit ? <a href="{% url 'store:login' %}" class="text-info">Se connecter</a>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
