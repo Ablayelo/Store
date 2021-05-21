@@ -1,9 +1,7 @@
-from profiles.models import Profile
+from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth.models import User
-from django.db.models.fields import CharField
-from django.forms.widgets import EmailInput, PasswordInput, TextInput
+from django.forms.widgets import PasswordInput, TextInput
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
@@ -18,7 +16,9 @@ class LoginForm(AuthenticationForm):
             'class':'form-control'
             }
         ))
-
+    class Meta:
+        model = User
+        fields = ('username', 'password')
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(
@@ -28,7 +28,7 @@ class SignUpForm(UserCreationForm):
                 "class": "form-control"
             }
         ))
-    email = forms.EmailField(
+    email = forms.CharField(
         widget=forms.EmailInput(
             attrs={
                 "placeholder" : "Email",                
@@ -37,13 +37,13 @@ class SignUpForm(UserCreationForm):
         ))
     first_name = forms.CharField(
         widget=TextInput(attrs={
-            'palceholder':'Prenom',
+            'placeholder':'Prenom',
             'class':'form-control'
             }
         ))
     last_name = forms.CharField(
         widget=TextInput(attrs={
-            'palceholder':'Nom',
+            'placeholder':'Nom',
             'class':'form-control'
             }
         ))
@@ -62,6 +62,6 @@ class SignUpForm(UserCreationForm):
             }
         ))
 
-    class Meta:
-        model = Profile
+    class Meta: 
+        model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')

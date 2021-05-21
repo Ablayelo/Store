@@ -25,27 +25,30 @@ from django.contrib.auth import authenticate, login, logout
 #             login(request, user)
 #             return redirect('store:index')
 #     return render(request, 'store/login.html')
-def loginView(request):
-    form = LoginForm(request.POST)
-    msg = None
-    if not request.user.is_authenticated:
-        if request.method == 'POST':
-            if form.is_valid():
-                username = form.cleaned_data.get('username')
-                password = form.cleaned_data.get('password')
-                profile = authenticate(username=username, password=password)
-                if profile is not None:
-                    login(request, profile)
-                    return redirect('profile:profile')
-                else:
-                        msg = 'Infos invalides'
+# def loginView(request):
+#     if request.user.is_authenticated:
+#         return redirect('store:profile')
+#     else:
+#         form = LoginForm(request.POST)
+#         msg = None
+#         if not request.user.is_authenticated:
+#             if request.method == 'POST':
+#                 if form.is_valid():
+#                     username = form.cleaned_data.get('username')
+#                     password = form.cleaned_data.get('password')
+#                     profile = authenticate(username=username, password=password)
+#                     if profile is not None:
+#                         login(request, profile)
+#                         return redirect('profile:profile')
+#                     else:
+#                             msg = 'Infos invalides'
 
-            else:
-                msg = 'Vérifier vos informtions'
-    else:
-        return redirect('store:index')
+#                 else:
+#                     msg = 'Vérifier vos informtions'
+#         else:
+#             return redirect('store:index')
 
-    return render(request, 'store/login.html', {'form': form, 'msg': msg})
+#     return render(request, 'store/login.html', {'form': form, 'msg': msg})
 
 
 # ==============================SingUp====================================
@@ -88,8 +91,8 @@ def index(request):
 # =========================Peoduct Detail view===============
 
 
-def productDetail(request, id):
-    product = Product.objects.get(id=id)
+def productDetail(request,*args, **kwargs):
+    product = Product.objects.get(id=kwargs.get('id'))
 
     context = {'product': product, }
     return render(request, 'store/product-detail.html', context)
@@ -99,32 +102,27 @@ def productDetail(request, id):
 
 def cart(request):
     
-    user = Profile.objects.filter(first_nane=request.user.first_name, last_name=request.user.last_name)
-    profile = request.user
-    order = Order.objects.filter(profile=profile)
-    if order:  
-        if request.user.is_authenticated:
-            order, created = Order.objects.get_or_create(profile=profile, complete=False )
-            items = order.orderitem_set.all()
-        else:
-            items=[]
-            order ={'get_cart_total':0, 'get_cart_item':0}
-        context = {'items':items, 'order':order}
-    else:
-        msg = 'panier vide, <a href="/">ajouter</a> des produits'
-        context = {'msg':msg, 'user':user}
-    return render(request, 'store/cart.html', context)
-
-# ========================Checkout view=======================
-
-
-def checkout(request):
-    user = request.user
-    if user.is_authenticated:
-        profile = user.profile
+    if request.user.is_authenticated:
+        profile=request.user.profile
         order, created = Order.objects.get_or_create(profile=profile, complete=False )
         items = order.orderitem_set.all()
     else:
+        items=[]
+        order ={'get_cart_total':0, 'get_cart_item':0}
+    context = {'items':items, 'order':order}
+
+    return render(request, 'store/cart.html', context)
+
+
+# ========================Checkout view=======================
+def checkout(request):
+    
+    if request.user.is_authenticated:
+        profile = request.user.profile
+        order, created = Order.objects.get_or_create(profile=profile, complete=False )
+        items = order.orderitem_set.all()
+    else:
+        session = request.session
         items=[]
         order ={'get_cart_total':0, 'get_cart_item':0}
     context = {'items':items, 'order':order}

@@ -1,7 +1,7 @@
 {% extends 'store/base.html' %}
 {% load static %}
 {% block css %}<link rel="stylesheet" href="{% static 'store/css/profile.css' %}">{% endblock css %}
-{% block title %}Profile|DeliaShop{% endblock title %}
+{% block title %}Profile | DeliaShop{% endblock title %}
 
 {% block content %}
 <div class="container-fluid">
@@ -20,6 +20,6 @@
     </div>
 </div>
 <script>
-    document.getElementById('login').innerHTML = '<p style="color: aliceblue;margin-top:10px; " >Bienvenue {{user.first_name}} {{user.last_name}}</p>'
+    document.getElementById('login').innerHTML = '<p style="color: aliceblue;margin-top:10px; " >Bienvenue {{request.user.get_full_name}}</p>'
 </script>
 {% endblock content %}

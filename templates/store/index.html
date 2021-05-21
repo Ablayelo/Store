@@ -10,7 +10,7 @@
     <div class="row">
         {% for product in products %}
         <div class=" product-detail col-md-3 col-sm-6 rounded" >
-            <a href="{% url 'store:product-detail' product.id  %}"><img class="product-image" class="img-fluid rounded" src=" {{product.imageURL}} " alt=""></a>
+        <div class="   "><a href="{% url 'store:product-detail' product.id  %}"><img class="product-image" class="img-fluid rounded" src=" {{product.imageURL}} " alt=""></a></div>
             <div class="box-element">
                 <a href="{% url 'store:product-detail' product.id %}"><h6><b>{{product.name}}</b></h6></a>
                 <h6><b>{{product.price}} Fcfa</b></h6>

@@ -26,7 +26,7 @@
                 {% if success %}
 
                 <p>
-                    Veuillez vous <a href="{% url 'store:login' %}">connecter</a> en utilisant ce nouveau compte.
+                    Veuillez vous <a href="{% url 'login' %}">connecter</a> en utilisant ce nouveau compte.
                 </p>
 
                 {% else %}
@@ -36,18 +36,18 @@
                     <div class="row">
                         <div class="col-md-6 px-md-1">
                             <div class="form-group">
-                                <label>Username</label>
+                                <label></label>
                                 {{ form.username }}
                             </div>
-                            <div><span class="text-danger">{{ form.username.errors }}</span></div>
+                            <span class="text-danger"><small style="font-size: 10px;">{{ form.username.errors }}</small></span>
                         </div>
 
                         <div class="col-md-6 px-md-1">
                             <div class="form-group">
-                                <label>Email</label>
+                                <label></label>
                                 {{ form.email }}
                             </div>
-                            <div><span class="text-danger">{{ form.email.errors }}</span></div>
+                            <div><span class="text-danger"><small>{{ form.email.errors }}</small></span></div>
                         </div>
                         
 
@@ -55,37 +55,37 @@
                     <div class="row">
                         <div class="col-md-6 px-md-1">
                             <div class="form-group">
-                                <label>Prenom</label>
+                                <label></label>
                                 {{ form.first_name }}
                             </div>
-                            <div><span class=" text-danger">{{ form.first_name.errors }}</span></div>
+                            <div><span class=" text-danger"><small>{{ form.first_name.errors }}</small></span></div>
                         </div>
 
                         <div class="col-md-6 px-md-1">
                             <div class="form-group">
-                                <label>Nom</label>
+                                <label></label>
                                 {{ form.last_name }}
                             </div>
-                            <div> <span class="text-danger">{{ form.last_name.errors }}</span></div>
+                            <div> <span class="text-danger"><small>{{ form.last_name.errors }}</small></span></div>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col-md-6 px-md-1">
                             <div class="form-group">
-                                <label>Mot de passe</label>
+                                <label></label>
                                 {{ form.password1 }}
                             </div>
-                            <div><span class="text-danger">{{ form.password1.errors }}</span></div>
+                            <div><span class="text-danger"><small>{{ form.password1.errors }}</small></span></div>
 
                         </div>
                         
                         <div class="col-md-6 px-md-1">
                             <div class="form-group">
-                                <label>Vérification de mot de passe</label>
+                                <label></label>
                                 {{ form.password2 }}
                             </div>
-                            <div><span class="text-danger">{{ form.password2.errors }}</span></div>
+                            <div><span class="text-danger"><small style="font-size: small;" >{{ form.password2.errors }}</small></span></div>
                         </div>
                        
                     </div>
@@ -93,7 +93,7 @@
                 <div class="card-footer">
                     <button type="submit" name="register" class="btn  btn-outline-info">M'inscrire</button>
                     &nbsp; &nbsp;
-                    Déjà inscrit ? <a href="{% url 'store:login' %}" class="text-info">Se connecter</a>
+                    Déjà inscrit ? <a href="{% url 'login' %}" class="text-info">Se connecter</a>
                 </div>
                 {% endif %}
             </form>

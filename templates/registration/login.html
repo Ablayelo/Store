@@ -1,0 +1,48 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'store/css/login.css'%}"> {% endblock css %}
+{% block title %}Connexion{% endblock title %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div style="margin-top: 20px; margin-left: 380px; position: relative; " class="card">
+                
+                <form action=" {% url 'login' %} " method="post" role="form">
+                    {% csrf_token %}
+                    <div class="card-header">
+                        <h5 class="title">Connexion</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="md-4 px-md-1">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    {{form.username}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="md-4 px-md-1">
+                                <div class="form-group">
+                                    <label>Mot de passe</label>
+                                    {{form.password}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-footer">
+                        <input type="submit" value="login" style="margin-left: 8px; margin-bottom: 5px;"
+                            class="btn btn-fill btn-outline-info">
+                            Se connecter
+                        </input>
+                        <input type="hidden" name="next" value="{{next}}">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

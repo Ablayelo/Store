@@ -4,6 +4,7 @@ from profiles.models import Profile
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+ 
 
 # Create your models here.
 #=======================Peofile==================================================================================================================
@@ -104,7 +105,7 @@ class Order(models.Model):
 #=====================OrderItem=========================================================
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL,verbose_name='Produit',blank=True, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, verbose_name='Element_de_commande',blank=True, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, verbose_name='Commande',blank=True, null=True)
     qty = models.IntegerField(default=0, verbose_name="Quantité", blank=True, null=True)
     ordered_at = models.DateTimeField(auto_now_add=True)
 
@@ -118,13 +119,14 @@ class OrderItem(models.Model):
     
 
     def __str__(self):
-        return ' {0} {1} par {2}'.format(str(self.qty), self.product.name,self.order.profile)
+
+        return ' {0} {1} par: {2} '.format(str(self.qty), self.product.name, self.order.profile)
 
 #===========================Adresse de livraison============================================
 class ShippingAddress(models.Model):
     """docstring for ShippingAdress"""
     profile=models.ForeignKey(
-        Profile, verbose_name='Adresse_de_livraison' , on_delete=models.SET_NULL , null=True)
+        Profile, verbose_name= _('Adresse_de_livraison') , on_delete=models.SET_NULL , null=True)
     order=models.ForeignKey(
         Order, on_delete=models.CASCADE, verbose_name='Commande liée', blank=True, null=True)
     address=models.CharField(max_length=200, null=True)
